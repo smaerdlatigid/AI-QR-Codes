@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument("--prompt", type=str, default="futuristic city, neon lights, matrix, stars in skyline, qr code, tetrics, unreal engine, artstation, detailed landscape, hd, james turrell lighting, a black and white photo of a qr code, cgtrader", help="text prompt")
     parser.add_argument("--negative_prompt", type=str, default="ugly, disfigured, low quality, blurry, nsfw", help="negative text prompt")
     # model from huggingface
-    parser.add_argument("--model", type=str, default="stablediffusionapi/anything-v5", help="model from huggingface")
+    parser.add_argument("--model", type=str, default="runwayml/stable-diffusion-v1-5", help="model from huggingface")
     args = parser.parse_args()
     return args
 
