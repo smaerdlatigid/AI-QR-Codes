@@ -13,7 +13,14 @@ def parse_args():
     parser.add_argument("--prompt", type=str, default="futuristic city, neon lights, matrix, stars in skyline, qr code, tetrics, unreal engine, artstation, detailed landscape, hd, james turrell lighting, a black and white photo of a qr code, cgtrader", help="text prompt")
     parser.add_argument("--negative_prompt", type=str, default="ugly, disfigured, low quality, blurry, nsfw", help="negative text prompt")
     # model from huggingface
-    parser.add_argument("--model", type=str, default="runwayml/stable-diffusion-v1-5", help="model from huggingface")
+    parser.add_argument("--model", type=str, default="stablediffusionapi/deliberate-v2", help="model from huggingface")
+    # min and max values for conditioning_scale, guidance_scale and strength
+    parser.add_argument("--min_cscale", type=float, default=0.7, help="min conditioning_scale")
+    parser.add_argument("--max_cscale", type=float, default=2, help="max conditioning_scale")
+    parser.add_argument("--min_gscale", type=float, default=15, help="min guidance_scale")
+    parser.add_argument("--max_gscale", type=float, default=20, help="max guidance_scale")
+    parser.add_argument("--min_strength", type=float, default=0.65, help="min strength")
+    parser.add_argument("--max_strength", type=float, default=0.69, help="max strength")
     args = parser.parse_args()
     return args
 
@@ -71,9 +78,9 @@ if __name__ == "__main__":
     generator = torch.manual_seed(123121231)
 
     # loop over conditioning_scale, guidance_scale and strength to get a valid QR Code Image
-    for cscale in np.linspace(0.7,2,10):
-        for gscale in np.linspace(15,20,10):
-            for strength in np.linspace(0.65,0.69,10):
+    for cscale in np.linspace(args.min_cscale,args.max_cscale,10):
+        for gscale in np.linspace(args.min_gscale,args.max_gscale,10):
+            for strength in np.linspace(args.min_strength,args.max_strength,10):
                 image = pipe(prompt=args.prompt,
                             negative_prompt=args.negative_prompt,
                             image=init_image,
