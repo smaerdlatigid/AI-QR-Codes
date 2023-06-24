@@ -9,7 +9,7 @@ import qrcode
 # create input args for url and text prompt
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--url", type=str, default="https://media.discordapp.net/attachments/1023048538600517673/1121680664387932202/download.png?width=1272&height=1272", help="url of the image")
+    parser.add_argument("--url", type=str, default="https://youtu.be/dQw4w9WgXcQ", help="url of the image")
     parser.add_argument("--prompt", type=str, default="futuristic city, neon lights, matrix, stars in skyline, qr code, tetrics, unreal engine, artstation, detailed landscape, hd, james turrell lighting, a black and white photo of a qr code, cgtrader", help="text prompt")
     parser.add_argument("--negative_prompt", type=str, default="ugly, disfigured, low quality, blurry, nsfw", help="negative text prompt")
     # model from huggingface
@@ -23,6 +23,7 @@ if __name__ == "__main__":
     # get input args
     args = parse_args()
 
+    # 
     controlnet = ControlNetModel.from_pretrained("DionTimmer/controlnet_qrcode-control_v1p_sd15",
                                                 torch_dtype=torch.float16)
 
